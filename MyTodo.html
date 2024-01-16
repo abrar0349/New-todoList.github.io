@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Todo List</title>
+    <style>
+        .container {
+            margin: auto;
+            border: 2px solid gray;
+            width: 40vw;
+            padding-top: 6%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .innerCon {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 5%;
+        }
+        .innerCon input {
+            outline-color: gray;
+        }
+        ul li {
+            width: 99%;
+            margin: auto;
+            list-style: none;
+            background-color: gray;
+            margin-bottom: 0.5%;
+            margin-left: -2%;
+            padding: 1%;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="innerCon">
+            <input type="text" id="todoInput" placeholder="Enter todo">
+            <button style="margin-top: 2%;">Create</button>
+        </div>
+
+        <ul class="result"> </ul>
+
+    </div>
+
+ 
+</body>
+
+<script>
+    const Int = document.querySelector('.innerCon input')
+    const Btn = document.querySelector('.innerCon button')
+    const StorList = document.querySelector('.container .result')
+
+    Btn.addEventListener('click', function (){
+        console.log('its working')
+         GenToDoList()
+    })
+
+    function GenToDoList(){
+        console.log( Int.value )
+
+        const newLi = document.createElement('li')
+        newLi.innerHTML = `${Int.value}   <span>
+        <i class="fas fa-trash" onclick="removeTodo(this)"></i>
+        <i class="fas fa-edit" onclick="renameTodo(this)"></i>
+        </span>`;
+
+        StorList.appendChild(newLi)
+
+        Int.value = ''
+    }
+
+    function removeTodo(element){
+       let span = element.parentNode;
+       span.parentNode.remove()
+    }
+
+    function renameTodo(element){
+        let span = element.parentNode;
+        writeVar = prompt('Enter the new content')
+        span.parentNode.firstChild.nodeValue = writeVar;
+    }
+    </script>
+</html>
